@@ -10,7 +10,7 @@ const TopNav = () => {
         <Link href='/login' className='nav-link'>
           Login
         </Link>
-        <Link href='/login' className='nav-link'>
+        <Link href='/register' className='nav-link'>
           Register
         </Link>
       </div>

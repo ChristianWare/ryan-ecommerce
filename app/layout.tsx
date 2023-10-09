@@ -1,7 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import "bootstrap-material-design/dist/css/bootstrap-material-design.min.css"
+import "bootstrap-material-design/dist/css/bootstrap-material-design.min.css";
 import TopNav from "@/components/TopNav";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Next E-Comm",
@@ -17,8 +18,9 @@ export default function RootLayout({
     <html lang='en'>
       <body>
         <TopNav />
+        <Toaster />
         {children}
-        </body>
+      </body>
     </html>
   );
 }

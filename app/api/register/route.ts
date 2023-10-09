@@ -20,6 +20,7 @@ export async function POST(req: { json: () => any }) {
     return NextResponse.json({ success: "Registered Successfully" });
   } catch (err) {
     console.log(err);
-    return NextResponse.json({ err: err.message }, { status: 500 });
+    const error = err as Error; // Type assertation
+    return NextResponse.json({ err: error.message }, { status: 500 });
   }
 }

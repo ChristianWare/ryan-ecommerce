@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -8,11 +10,33 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const router = useRouter();
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
       setLoading(true);
-      console.log(name, email, password);
+
+      const response = await fetch(`${process.env.API}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        toast.error(data.err);
+        setLoading(false);
+      } else {
+        toast.success(data.success);
+        router.push("/login");
+      }
     } catch (err) {
       console.log(err);
       setLoading(false);
