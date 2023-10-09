@@ -1,9 +1,9 @@
-const config = require("./config");
+const config = require("./config.ts");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   env: {
-    DB_URL: config.DB_URI,
+    DB_URI: config.DB_URI,
   },
 };
 
