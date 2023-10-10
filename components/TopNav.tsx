@@ -20,7 +20,7 @@ const TopNav = () => {
           </Link>
           <a
             className='nav-link pointer'
-            onClick={() => signOut({ callbackUrl: "login" })}
+            onClick={() => signOut({ callbackUrl: "/login" })}
           >
             Logout
           </a>
