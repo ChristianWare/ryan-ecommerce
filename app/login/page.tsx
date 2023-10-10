@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 const RegisterPage = () => {
@@ -11,6 +11,8 @@ const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -28,7 +30,8 @@ const RegisterPage = () => {
         setLoading(false);
       } else {
         toast.success("Logged in Successfully");
-        router.push("/");
+        // router.push("/");
+        router.push(callbackUrl);
       }
     } catch (err) {
       console.log(err);
@@ -65,6 +68,12 @@ const RegisterPage = () => {
                 {loading ? "Please Wait..." : "Submit"}
               </button>
             </form>
+              <button
+                className='btn btn-danger btn-raised mb-4'
+                onClick={() => signIn("google", { callbackUrl })}
+              >
+                Sign In with Google
+              </button>
           </div>
         </div>
       </div>
