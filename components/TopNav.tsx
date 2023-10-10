@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
 const TopNav = () => {
-  const { data, status, loading } = useSession();
-  console.table({ data, status, loading });
+  const { data, status } = useSession();
+  console.log({ data, status });
 
   return (
     <nav className='nav shadow p-2 justify-content-between mb-3'>
