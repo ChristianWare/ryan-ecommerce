@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ const LoginPage = () => {
         toast.error(result?.error);
         setLoading(false);
       } else {
-        toast.success("Logged in successfully");
+        toast.success("Logged in Successfully");
         router.push("/");
       }
     } catch (err) {
@@ -35,9 +35,9 @@ const LoginPage = () => {
       setLoading(false);
     }
   };
+
   return (
     <main>
-      <h1>Login Page</h1>
       <div className='container'>
         <div className='row d-flex justify-content-center align-items-center vh-100'>
           <div className='col-lg-5 shadow bg-light p-5'>
@@ -71,5 +71,4 @@ const LoginPage = () => {
     </main>
   );
 };
-
-export default LoginPage;
+export default RegisterPage;

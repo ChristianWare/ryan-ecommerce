@@ -1,6 +1,12 @@
+"use client";
+
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 
 const TopNav = () => {
+  const { data, status, loading } = useSession();
+  console.table({ data, status, loading });
+
   return (
     <nav className='nav shadow p-2 justify-content-between mb-3'>
       <Link href='/' className='nav-link'>
