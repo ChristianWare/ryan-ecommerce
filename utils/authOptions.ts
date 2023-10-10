@@ -1,5 +1,5 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import GoogleProvider from 'next-auth/providers/google'
+import GoogleProvider from "next-auth/providers/google";
 import User from "../models/user";
 import bcrypt from "bcrypt";
 import dbConnect from "./dbConnect";
@@ -35,7 +35,22 @@ export const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    async signIn({ user }: { user: any }) {
+      const { email, name, image } = user;
+      dbConnect();
 
+      let dbUser = await User.findOne({ email });
+      if (!dbUser) {
+        await User.create({
+          email,
+          name,
+          image,
+        });
+      }
+      return true;
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/login",

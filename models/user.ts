@@ -1,14 +1,32 @@
-import mongoose from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
 import uniqueValidator from "mongoose-unique-validator";
 
-const userSchema = new mongoose.Schema(
+// Define the User document type
+interface UserDocument extends Document {
+  name: string;
+  email: string;
+  password: string;
+  role: string;
+  image: string;
+  resetCode: {
+    data: string;
+    expiresAt: Date;
+  };
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// Define the User model type
+interface UserModel extends Model<UserDocument> {}
+
+const userSchema = new mongoose.Schema<UserDocument>(
   {
     name: {
       type: String,
       required: [true, "Name is required."],
       trim: true,
       minLength: 1,
-      maxLength: 20,
+      maxLength: 200,
     },
     email: {
       type: String,
@@ -16,9 +34,9 @@ const userSchema = new mongoose.Schema(
       index: true,
       lowercase: true,
       unique: true,
-      trime: true,
+      trim: true,
       minLength: 5,
-      maxLength: 20,
+      maxLength: 200,
     },
     password: String,
     role: {
@@ -39,4 +57,5 @@ const userSchema = new mongoose.Schema(
 
 userSchema.plugin(uniqueValidator);
 
-export default mongoose.models.User || mongoose.model("User", userSchema);
+export default mongoose.models.User ||
+  mongoose.model<UserDocument, UserModel>("User", userSchema);
