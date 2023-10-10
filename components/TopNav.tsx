@@ -14,9 +14,10 @@ const TopNav = () => {
       </Link>
 
       {status === "authenticated" ? (
-        <>
+        <div className='justify-content-end'>
           <Link href='/dashboard/user' className='nav-link'>
-            {data?.user?.name}
+            {data?.user?.name} (
+            {(data?.user as { role: string } | undefined)?.role})
           </Link>
           <a
             className='nav-link pointer'
@@ -24,9 +25,9 @@ const TopNav = () => {
           >
             Logout
           </a>
-        </>
+        </div>
       ) : status === "loading" ? (
-        <a className="nav-link text-danger">Loading</a>
+        <a className='nav-link text-danger'>Loading</a>
       ) : (
         <div className='d-flex'>
           <Link href='/login' className='nav-link'>

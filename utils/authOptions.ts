@@ -50,6 +50,17 @@ export const authOptions = {
       }
       return true;
     },
+    jwt: async ({ token, user }: { token: any; user: any }) => {
+      const userByEmail = await User.findOne({ email: token.email });
+      userByEmail.password = undefined;
+      userByEmail.resetCode = undefined;
+      token.user = userByEmail;
+      return token;
+    },
+    session: async ({ session, token }: { session: any; token: any }) => {
+      session.user = token.user;
+      return session;
+    },
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
