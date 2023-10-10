@@ -14,8 +14,13 @@ const TopNav = () => {
       </Link>
 
       {status === "authenticated" ? (
-        <div className='justify-content-end'>
-          <Link href='/dashboard/user' className='nav-link'>
+        <div className='d-flex justify-content-end'>
+          <Link
+            href={`/dashboard/${
+              (data?.user as { role: string } | undefined)?.role === "admin" ? "admin" : "user"
+            }`}
+            className='nav-link'
+          >
             {data?.user?.name} (
             {(data?.user as { role: string } | undefined)?.role})
           </Link>
