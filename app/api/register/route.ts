@@ -1,9 +1,9 @@
-import { NextResponse } from "next/server";
+import { NextResponse, NextRequest } from "next/server";
 import dbConnect from "@/utils/dbConnect";
 import User from "@/models/user";
 import bcrypt from "bcrypt";
 
-export async function POST(req: { json: () => any }) {
+export async function POST(req: NextRequest) {
   await dbConnect();
 
   const body = await req.json();

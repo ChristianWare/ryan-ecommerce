@@ -6,7 +6,9 @@ import dbConnect from "./dbConnect";
 
 export const authOptions = {
   session: {
-    strategy: "jwt",
+    // strategy: "jwt",
+    jwt: true,
+    maxAge: 30 * 24 * 60 * 60, // 30 days (adjust as needed)
   },
   providers: [
     GoogleProvider({
@@ -19,7 +21,10 @@ export const authOptions = {
       },
       async authorize(credentials, req) {
         dbConnect();
-        const { email, password } = credentials;
+        const { email, password } = credentials as {
+          email: string;
+          password: string;
+        }; // Type assertion
         const user = await User.findOne({ email });
 
         if (!user) {
