@@ -16,6 +16,9 @@ const TopNav = () => {
 
       {status === "authenticated" ? (
         <div className='d-flex justify-content-end'>
+          <Link href='/profile' className='nav-link'>
+            Profile
+          </Link>
           <Link
             href={`/dashboard/${
               (data?.user as { role: string } | undefined)?.role === "admin"
