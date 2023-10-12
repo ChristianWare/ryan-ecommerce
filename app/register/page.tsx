@@ -45,7 +45,6 @@ const RegisterPage = () => {
 
   return (
     <main>
-      <h1>Register Page</h1>
       <div className='container'>
         <div className='row d-flex justify-content-center align-items-center vh-100'>
           <div className='col-lg-5 shadow bg-light p-5'>
@@ -57,21 +56,21 @@ const RegisterPage = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className='form-control mb-4'
-                placeholder='Enter your name'
+                placeholder='Username'
               />
               <input
                 type='email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className='form-control mb-4'
-                placeholder='Enter your email'
+                placeholder='Email'
               />
               <input
                 type='password'
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className='form-control mb-4'
-                placeholder='Enter your password'
+                placeholder='Password'
               />
               <button
                 className='btn btn-primary btn-raised'
