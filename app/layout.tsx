@@ -5,6 +5,8 @@ import "bootstrap-material-design/dist/css/bootstrap-material-design.min.css";
 import TopNav from "@/components/TopNav";
 import { Toaster } from "react-hot-toast";
 import { SessionProvider } from "next-auth/react";
+import LayoutProvider from "@/providers/LayoutProvider";
+import StoreProvider from "@/providers/StoreProvider";
 
 // export const metadata: Metadata = {
 //   title: "Next E-Comm",
@@ -20,9 +22,13 @@ export default function RootLayout({
     <html lang='en'>
       <SessionProvider>
         <body>
-          <TopNav />
-          <Toaster />
-          {children}
+          <StoreProvider>
+            {/* <LayoutProvider> */}
+            <TopNav />
+            <Toaster />
+            {children}
+            {/* </LayoutProvider> */}
+          </StoreProvider>
         </body>
       </SessionProvider>
     </html>
