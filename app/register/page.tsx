@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react";
+
 
 const RegisterPage = () => {
   const [name, setName] = useState("");
@@ -11,13 +13,15 @@ const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
       setLoading(true);
 
-      const response = await fetch(`${process.env.API}/register`, {
+      const response = await fetch("/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +35,7 @@ const RegisterPage = () => {
 
       const data = await response.json();
       if (!response.ok) {
-        toast.error(data.err);
+        toast.error("Email is invalid or already taken");
         setLoading(false);
       } else {
         toast.success(data.success);
@@ -79,6 +83,12 @@ const RegisterPage = () => {
                 {loading ? "Please Wait..." : "Submit"}
               </button>
             </form>
+            <button
+              className='btn btn-raised mb-4'
+              onClick={() => signIn("google", { callbackUrl })}
+            >
+              Sign up with Google
+            </button>
           </div>
         </div>
       </div>
