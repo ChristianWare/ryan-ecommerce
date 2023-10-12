@@ -30,7 +30,6 @@ const RegisterPage = () => {
         setLoading(false);
       } else {
         toast.success("Logged in Successfully");
-        // router.push("/");
         router.push(callbackUrl);
       }
     } catch (err) {

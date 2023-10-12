@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const TopNav = () => {
   const { data, status } = useSession();
@@ -17,7 +18,9 @@ const TopNav = () => {
         <div className='d-flex justify-content-end'>
           <Link
             href={`/dashboard/${
-              (data?.user as { role: string } | undefined)?.role === "admin" ? "admin" : "user"
+              (data?.user as { role: string } | undefined)?.role === "admin"
+                ? "admin"
+                : "user"
             }`}
             className='nav-link'
           >
@@ -26,7 +29,9 @@ const TopNav = () => {
           </Link>
           <a
             className='nav-link pointer'
-            onClick={() => signOut({ callbackUrl: "/login" })}
+            onClick={() => {
+              signOut({ callbackUrl: "/login" });
+            }}
           >
             Logout
           </a>

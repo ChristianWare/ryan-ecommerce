@@ -8,7 +8,7 @@ export const authOptions = {
   session: {
     // strategy: "jwt",
     jwt: true,
-    maxAge: 30 * 24 * 60 * 60, // 30 days (adjust as needed)
+    maxAge: 7 * 24 * 60 * 60, // 7 days (adjust as needed)
   },
   providers: [
     GoogleProvider({

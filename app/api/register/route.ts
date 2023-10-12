@@ -17,7 +17,9 @@ export async function POST(req: NextRequest) {
     }).save();
 
     // console.log("user created => ", user);
-    return NextResponse.json({ success: "Registered Successfully" });
+    return NextResponse.json({
+      success: "Registered Successfully, please login to continue",
+    });
   } catch (err) {
     console.log(err);
     const error = err as Error; // Type assertation
