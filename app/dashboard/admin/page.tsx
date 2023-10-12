@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import styles from "./AdminPage.module.css";
+import CategoriesList from "@/components/CategoriesList/CategoriesList";
 
 const adminMenu = [
   {
@@ -13,6 +14,7 @@ const adminMenu = [
     id: 2,
     menutItem: "Categories",
     menuDesc: "All categories listed here",
+    btn: <CategoriesList />
   },
   {
     id: 3,
@@ -61,6 +63,7 @@ const AdminPage = () => {
           <hr />
           <h2>{y.menutItem}</h2>
           <p>{y.menuDesc}</p>
+          <div>{y.btn}</div>
         </div>
       ))}
     </div>
