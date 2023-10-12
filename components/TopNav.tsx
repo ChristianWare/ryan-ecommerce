@@ -9,16 +9,13 @@ import toast from "react-hot-toast";
 
 const TopNav = () => {
   const { data, status } = useSession();
-  // console.log(data);
-  // console.log(status);
   const { currentUser } = useSelector((state: any) => state.user);
-  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
   const getCurrentUser = async () => {
     try {
-      dispatch(SetCurrentUser(data?.user?.name));
+      dispatch(SetCurrentUser(data?.user?.name?.slice(0, 1)));
     } catch (error: any) {
       console.log("Something went wrong");
     }
@@ -34,7 +31,6 @@ const TopNav = () => {
       <Link href='/' className='nav-link'>
         🛒 NEXT ECOMM
       </Link>
-      <h1>{currentUser}</h1>
       {status === "authenticated" ? (
         <div className='d-flex justify-content-end'>
           <Link href='/profile' className='nav-link'>
@@ -43,7 +39,12 @@ const TopNav = () => {
           <Link href='/profile' className='nav-link'>
             Profile
           </Link>
-          <Link href='/profile' className='nav-link'>
+          <Link
+            href={`/dashboard/${
+              (data?.user as { role: string } | undefined)?.role
+            }`}
+            className='nav-link'
+          >
             {currentUser} ({(data?.user as { role: string } | undefined)?.role})
           </Link>
           <a
