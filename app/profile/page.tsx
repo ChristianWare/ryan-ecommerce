@@ -6,33 +6,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { SetCurrentUser } from "@/redux/userSlice";
 import { useSession } from "next-auth/react";
 
-
-
-
 const ProfilePage = () => {
+  const { data, status } = useSession();
+  const { currentUser } = useSelector((state: any) => state.user);
 
-    const { data, status } = useSession();
-    const { currentUser } = useSelector((state: any) => state.user);
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-
-    const getCurrentUser = async () => {
-      try {
-        dispatch(SetCurrentUser(data?.user?.name?.slice(0, 1)));
-      } catch (error: any) {
-        console.log("Something went wrong");
-      }
-    };
-
-    // Call getCurrentUser when the session is authenticated
-    if (status === "authenticated" && !currentUser) {
-      getCurrentUser();
+  const getCurrentUser = async () => {
+    try {
+      dispatch(SetCurrentUser(data?.user?.name?.slice(0, 1)));
+    } catch (error: any) {
+      console.log("Something went wrong");
     }
+  };
 
-    // Call getCurrentUser when the session is authenticated
-    if (status === "authenticated" && !currentUser) {
-      getCurrentUser();
-    }
+  // Call getCurrentUser when the session is authenticated
+  if (status === "authenticated" && !currentUser) {
+    getCurrentUser();
+  }
+
+  // Call getCurrentUser when the session is authenticated
+  if (status === "authenticated" && !currentUser) {
+    getCurrentUser();
+  }
 
   const [toggle, setToggle] = useState(1);
 
@@ -62,9 +58,6 @@ const ProfilePage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.blogTabs}>
-        {currentUser && (
-          <h1>You are logged in</h1>
-        )}
         {adminMenu.map((x) => (
           <div className={styles.tab} key={x.id}>
             <div className={styles.tab} onClick={() => updateToggle(x.id)}>
